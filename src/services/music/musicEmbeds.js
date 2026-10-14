@@ -112,53 +112,44 @@ export function buildPlayerButtonRows(player, guildData) {
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.PAUSE)
             .setLabel('Pause')
-            .setStyle(ButtonStyle.Primary)
-            .setEmoji('⏸️')
+            .setStyle(ButtonStyle.Secondary)
             .setDisabled(Boolean(paused)),
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.RESUME)
             .setLabel('Resume')
-            .setStyle(ButtonStyle.Success)
-            .setEmoji('▶️')
+            .setStyle(ButtonStyle.Secondary)
             .setDisabled(!paused),
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.SKIP)
             .setLabel('Skip')
-            .setStyle(ButtonStyle.Secondary)
-            .setEmoji('⏭️'),
+            .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.STOP)
             .setLabel('Stop')
-            .setStyle(ButtonStyle.Danger)
-            .setEmoji('⏹️'),
+            .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.SHUFFLE)
             .setLabel('Shuffle')
-            .setStyle(guildData?.shuffle ? ButtonStyle.Success : ButtonStyle.Secondary)
-            .setEmoji('🔀'),
+            .setStyle(ButtonStyle.Secondary),
     );
 
     const row2 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.LOOP)
             .setLabel('Loop')
-            .setStyle(guildData?.loop !== 'none' ? ButtonStyle.Success : ButtonStyle.Secondary)
-            .setEmoji('🔁'),
+            .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.VOL_DOWN)
             .setLabel('Vol -')
-            .setStyle(ButtonStyle.Secondary)
-            .setEmoji('🔉'),
+            .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.VOL_UP)
             .setLabel('Vol +')
-            .setStyle(ButtonStyle.Secondary)
-            .setEmoji('🔊'),
+            .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.QUEUE)
             .setLabel('Queue')
-            .setStyle(ButtonStyle.Secondary)
-            .setEmoji('📋'),
+            .setStyle(ButtonStyle.Secondary),
     );
 
     return [row1, row2];
