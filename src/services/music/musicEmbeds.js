@@ -66,43 +66,12 @@ export function buildNowPlayingEmbed(track, player, guildData) {
             { name: 'Artist', value: track?.info?.author || 'Unknown', inline: true },
             { name: 'Requester', value: requesterLabel, inline: true },
             { name: 'Progress', value: `${position} / ${duration}`, inline: true },
-            { name: 'Volume', value: `${guildData?.volume ?? 75}%`, inline: true },
+            { name: 'Volume', value: `${guildData?.volume ?? 100}%`, inline: true }, // Defaults to 100%
             { name: 'Loop', value: getLoopLabel(guildData?.loop), inline: true },
             { name: 'Queue', value: `${player?.queue?.length || 0} track(s)`, inline: true },
         ],
         thumbnail: getTrackArtwork(track),
         footer: player?.paused ? 'Paused' : 'Playing',
-    });
-}
-
-export function buildQueueEmbed(queue, currentTrack, page = 0) {
-    const totalTracks = queue?.length || 0;
-    const totalPages = Math.max(1, Math.ceil(totalTracks / QUEUE_PAGE_SIZE));
-    const safePage = Math.min(Math.max(page, 0), totalPages - 1);
-    const start = safePage * QUEUE_PAGE_SIZE;
-    const slice = queue?.slice(start, start + QUEUE_PAGE_SIZE) || [];
-
-    let description = '';
-    if (currentTrack) {
-        description += `**Now Playing**\n${currentTrack.info?.title || 'Unknown'} — ${currentTrack.info?.author || 'Unknown'}\n\n`;
-    }
-
-    if (slice.length === 0) {
-        description += 'The queue is empty.';
-    } else {
-        description += slice
-            .map((track, index) => {
-                const num = start + index + 1;
-                return `${num}. ${track.info?.title || 'Unknown'} — ${track.info?.author || 'Unknown'}`;
-            })
-            .join('\n');
-    }
-
-    return createEmbed({
-        title: 'Music Queue',
-        description: description.substring(0, 4096),
-        color: 'info',
-        footer: `Page ${safePage + 1} of ${totalPages} • ${totalTracks} queued`,
     });
 }
 
@@ -133,18 +102,11 @@ export function buildPlayerButtonRows(player, guildData) {
             .setStyle(ButtonStyle.Secondary),
     );
 
+    // Row 2 without volume buttons
     const row2 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.LOOP)
             .setLabel('Loop')
-            .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder()
-            .setCustomId(MUSIC_BUTTON_IDS.VOL_DOWN)
-            .setLabel('Vol -')
-            .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder()
-            .setCustomId(MUSIC_BUTTON_IDS.VOL_UP)
-            .setLabel('Vol +')
             .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.QUEUE)
