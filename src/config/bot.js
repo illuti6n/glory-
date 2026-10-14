@@ -23,7 +23,7 @@ export const botConfig = {
     // 5 = Competing
     activities: [
       {
-        name: "Glory", // required by Discord API, not shown in the client
+        name: "Glory Members", // required by Discord API, not shown in the client
         state: "gbe",      // this is what people actually see
         type: 3,                // Custom
       },
@@ -52,7 +52,7 @@ export const botConfig = {
 
     // Command prefix for text-based commands (e.g., "!" for "!ping").
     // Supports both slash commands and prefix commands.
-    prefix: process.env.PREFIX || "!",
+    prefix: process.env.PREFIX || ".",
   },
 
   // =========================
