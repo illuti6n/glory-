@@ -66,7 +66,7 @@ export function buildNowPlayingEmbed(track, player, guildData) {
             { name: 'Artist', value: track?.info?.author || 'Unknown', inline: true },
             { name: 'Requester', value: requesterLabel, inline: true },
             { name: 'Progress', value: `${position} / ${duration}`, inline: true },
-            { name: 'Volume', value: '100%', inline: true },
+            { name: 'Volume', value: `${guildData?.volume ?? 75}%`, inline: true },
             { name: 'Loop', value: getLoopLabel(guildData?.loop), inline: true },
             { name: 'Queue', value: `${player?.queue?.length || 0} track(s)`, inline: true },
         ],
@@ -137,6 +137,14 @@ export function buildPlayerButtonRows(player, guildData) {
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.LOOP)
             .setLabel('Loop')
+            .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder()
+            .setCustomId(MUSIC_BUTTON_IDS.VOL_DOWN)
+            .setLabel('Vol -')
+            .setStyle(ButtonStyle.Secondary),
+        new ButtonBuilder()
+            .setCustomId(MUSIC_BUTTON_IDS.VOL_UP)
+            .setLabel('Vol +')
             .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.QUEUE)
