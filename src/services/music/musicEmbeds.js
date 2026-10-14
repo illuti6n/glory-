@@ -66,7 +66,7 @@ export function buildNowPlayingEmbed(track, player, guildData) {
             { name: 'Artist', value: track?.info?.author || 'Unknown', inline: true },
             { name: 'Requester', value: requesterLabel, inline: true },
             { name: 'Progress', value: `${position} / ${duration}`, inline: true },
-            { name: 'Volume', value: `${guildData?.volume ?? 75}%`, inline: true },
+            { name: 'Volume', value: '100%', inline: true },
             { name: 'Loop', value: getLoopLabel(guildData?.loop), inline: true },
             { name: 'Queue', value: `${player?.queue?.length || 0} track(s)`, inline: true },
         ],
@@ -108,6 +108,8 @@ export function buildQueueEmbed(queue, currentTrack, page = 0) {
 
 export function buildPlayerButtonRows(player, guildData) {
     const paused = player?.paused;
+    
+    // Row 1: Pause, Resume, Skip, Stop (Shuffle removed)
     const row1 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.PAUSE)
@@ -127,24 +129,13 @@ export function buildPlayerButtonRows(player, guildData) {
             .setCustomId(MUSIC_BUTTON_IDS.STOP)
             .setLabel('Stop')
             .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder()
-            .setCustomId(MUSIC_BUTTON_IDS.SHUFFLE)
-            .setLabel('Shuffle')
-            .setStyle(ButtonStyle.Secondary),
     );
 
+    // Row 2: Loop, Queue (Vol - and Vol + removed)
     const row2 = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.LOOP)
             .setLabel('Loop')
-            .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder()
-            .setCustomId(MUSIC_BUTTON_IDS.VOL_DOWN)
-            .setLabel('Vol -')
-            .setStyle(ButtonStyle.Secondary),
-        new ButtonBuilder()
-            .setCustomId(MUSIC_BUTTON_IDS.VOL_UP)
-            .setLabel('Vol +')
             .setStyle(ButtonStyle.Secondary),
         new ButtonBuilder()
             .setCustomId(MUSIC_BUTTON_IDS.QUEUE)
