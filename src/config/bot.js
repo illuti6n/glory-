@@ -24,7 +24,6 @@ export const botConfig = {
     activities: [
       {
         name: "Glory Members", // required by Discord API, not shown in the client
-        state: "gbe",      // this is what people actually see
         type: 3,                // Custom
       },
     ],
