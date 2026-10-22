@@ -23,8 +23,8 @@ export const botConfig = {
     // 5 = Competing
     activities: [
       {
-        name: "Glory Members", // required by Discord API, not shown in the client
-        type: 3,                // Custom
+        name: "Glory", // required by Discord API, not shown in the client
+        type: 5,                // Custom
       },
     ],
   },
@@ -449,7 +449,7 @@ export const botConfig = {
   features: {
     // Core systems.
     economy: true,
-    leveling: false,
+    leveling: true,
     moderation: true,
     logging: true,
     welcome: true,
